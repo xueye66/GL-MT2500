@@ -6,6 +6,7 @@ feeds:
     branch: master
 packages:
   - luci-app-ssr-plus
+  - default-settings
   - dnsmasq-full
 
 
