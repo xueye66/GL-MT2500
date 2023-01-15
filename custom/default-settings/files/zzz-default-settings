@@ -31,15 +31,4 @@ uci del dhcp.lan.dhcpv6
 uci del dhcp.lan.ra_management
 uci commit dhcp
 
-uci set firewall.@defaults[0].input='ACCEPT'
-uci set firewall.@defaults[0].output='ACCEPT'
-uci set firewall.@defaults[0].forward='ACCEPT'
-uci set firewall.@zone[1].input='ACCEPT'
-uci set firewall.@zone[1].output='ACCEPT'
-uci set firewall.@zone[1].forward='ACCEPT'
-uci commit firewall
-fw3 reload
-
-sed -i 's/root::0:0:99999:7:::/root:$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.:0:0:99999:7:::/g' /etc/shadow
-
 exit 0
