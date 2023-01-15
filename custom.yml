@@ -14,4 +14,3 @@ packages:
 diffconfig: |
   CONFIG_PACKAGE_dnsmasq=n
   CONFIG_LUCI_LANG_zh_Hans=y
-  CONFIG_BUSYBOX_CUSTOM=y
