@@ -3,16 +3,9 @@
 uci set luci.main.lang=zh_cn
 uci commit luci
 
-#config system
 uci set system.@system[0].timezone=CST-8
 uci set system.@system[0].zonename=Asia/Shanghai
-uci del system.led_wan
 uci commit system
-
-#config network
-uci del network.wan
-uci del network.wan6
-uci commit network
 
 uci set network.lan.ipaddr='192.168.10.253'
 uci set network.lan.proto='static'
@@ -21,14 +14,37 @@ uci set network.lan.ifname='eth0 eth1'
 uci set network.lan.gateway='192.168.10.1'
 uci set network.lan.dns='192.168.10.1'
 uci set network.lan.broadcast='192.168.10.255'
-uci del network.lan.ip6assign
+uci set network.lan.ipv6=off
+uci delete network.lan.ip6assign
 uci set network.lan.delegate='0'
+uci set network.lan.force_link='0'
+uci set network.wan.ipv6='0'
+uci set network.wan.delegate='0'
+uci del network.wan
+uci del network.wan6
 uci commit network
 
 uci set dhcp.lan.ignore='1'
+uci set dhcp.lan.dhcpv6='disabled'
+uci set dhcp.lan.ra='disabled'
 uci del dhcp.lan.ra
-uci del dhcp.lan.dhcpv6
 uci del dhcp.lan.ra_management
 uci commit dhcp
+
+uci set firewall.@defaults[0].input='ACCEPT'
+uci set firewall.@defaults[0].output='ACCEPT'
+uci set firewall.@defaults[0].forward='ACCEPT'
+uci set firewall.@defaults[0].flow_offloading='1'
+uci set firewall.@defaults[0].flow_offloading_hw='1'
+uci set firewall.@zone[1].input='ACCEPT'
+uci set firewall.@zone[1].output='ACCEPT'
+uci set firewall.@zone[1].forward='ACCEPT'
+uci commit firewall
+fw3 reload
+
+sed -i 's/root::0:0:99999:7:::/root:$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF.:0:0:99999:7:::/g' /etc/shadow
+
+rm -rf /tmp/luci-modulecache/
+rm -f /tmp/luci-indexcache
 
 exit 0
