@@ -1,16 +1,31 @@
 feeds:
   - name: custom
     path: ../feeds_dir/custom
-  - name: helloworld
-    uri: https://github.com/Zack0617/helloworld.git
-    branch: master
+  - name: NueXini_Packages
+    uri: https://github.com/NueXini/NueXini_Packages.git
+    branch: main
 packages:
-  - luci-app-ssr-plus
   - default-settings
   - dnsmasq-full
-
-
-
+  - luci-app-passwall
+  - luci-app-unblockmusic
+  - luci-app-adbyby-plus
+  - luci-app-ddns
+  - luci-app-diskman
+  - luci-app-filetransfer
+  - luci-app-frpc
+  - luci-app-go-aliyundrive-webdav
+  - luci-app-samba
+  - luci-app-uugamebooster
+  - luci-app-usb-printer
+  - luci-app-vssr
+  - luci-app-watchcat
+  - luci-app-zerotier
+  
 diffconfig: |
+  CONFIG_PACKAGE_wpad-basic=n
+  CONFIG_PACKAGE_wpad=n
   CONFIG_PACKAGE_dnsmasq=n
   CONFIG_LUCI_LANG_zh_Hans=y
+  CONFIG_BUSYBOX_CUSTOM=y
+  CONFIG_BUSYBOX_CONFIG_FEATURE_FLOAT_SLEEP=y
